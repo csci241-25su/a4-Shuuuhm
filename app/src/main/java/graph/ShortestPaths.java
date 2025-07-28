@@ -12,6 +12,8 @@ import java.util.Stack;
 //Name: Shayla Neitzel
 //Date: 7/27/25
 //Purpose: Implement Dijkstra's algorithm - A4
+//Idea for enhancement solution: Make all the distances the same so, whichever path leads it to destination first is the shortest one.
+//Design decision: not treat length as number of miles, but instead as number of hops
 
 
 /** Provides an implementation of Dijkstra's single-source shortest paths
@@ -48,7 +50,7 @@ public class ShortestPaths {
         
         for (Map.Entry<Node, Double> neighbor : closestNode.getNeighbors().entrySet()){
             Node thisNeighbor = neighbor.getKey();
-            Double distance = neighbor.getValue();
+            Double distance = 1.0;
             if (settledNodes.contains(thisNeighbor)){
                 continue;
             }
@@ -56,13 +58,14 @@ public class ShortestPaths {
             PathData currPathToNeighbor = paths.get(thisNeighbor);
 
             if(frontier.contains(thisNeighbor) == false){
-                frontier.add(thisNeighbor, distance + pathToParentNode.distance);
-                paths.put(thisNeighbor, new PathData(distance + pathToParentNode.distance, closestNode));
-            }else{
-                if (pathToParentNode.distance + distance < currPathToNeighbor.distance);
-                frontier.changePriority(thisNeighbor, distance + pathToParentNode.distance);
-                paths.put(thisNeighbor, new PathData(pathToParentNode.distance + distance, closestNode));
-            }
+                frontier.add(thisNeighbor, distance + pathToParentNode.distance); 
+                paths.put(thisNeighbor, new PathData(distance + pathToParentNode.distance, closestNode)); 
+            } 
+            // else{
+            //     if (pathToParentNode.distance + distance > currPathToNeighbor.distance);
+            //     frontier.changePriority(thisNeighbor, distance + pathToParentNode.distance);
+            //     paths.put(thisNeighbor, new PathData(pathToParentNode.distance + distance, closestNode));
+            // }
         }
 
         }
@@ -207,6 +210,7 @@ public class ShortestPaths {
         if (sp.shortestPath(graph.getNode(args[3])) == null){
             System.out.println("There is no path");
         }
+
     }
     }
 }
