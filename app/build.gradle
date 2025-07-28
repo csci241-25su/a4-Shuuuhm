@@ -24,7 +24,7 @@ dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
 
     // A4 depends on A3
-    implementation files('libs/heap.jar')
+    implementation fileTree(dir:'libs',include:['*.jar'])
 
 
 }
@@ -40,3 +40,5 @@ application {
     // Define the main class for the application.
     mainClass = 'graph.ShortestPaths'
 }
+
+
